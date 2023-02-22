@@ -94,8 +94,8 @@ def gaussian_mechanism_on_age(data):
 	for epsilon in epsilon_values:
 		scale_factor = l2_sensitivity/epsilon
 		sigma = np.sqrt(2 * np.log(1.25 / delta)) * scale_factor
-		laplace_noise = np.random.laplace(scale=sigma, size=N)
-		privatised_age = get_average_age(original_data + laplace_noise)
+		gaussian_noise = np.random.normal(scale=sigma)
+		privatised_age = get_average_age(original_data + gaussian_noise)
 		average_differences.append(abs(actual_average_age - privatised_age))
 
 	plt.plot(epsilon_values, average_differences)
